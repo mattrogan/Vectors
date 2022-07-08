@@ -3,22 +3,22 @@
 namespace VectorNS
 {
 
-    class Vector
+    public class Vector
     {
 
         protected float[] _vector;
 
-        Vector(float[] dims)
+        public Vector(float[] dims)
         {
             _vector = dims;
         }
 
-        Vector()
+        public Vector()
         {
             _vector = new float[2];
         }
 
-        void Set(int index, float value)
+        public void Set(int index, float value)
         {
             if (index >= Size())
             {
@@ -30,7 +30,7 @@ namespace VectorNS
             }
         }
 
-        float Get(int index)
+        public float Get(int index)
         {
             if (index >= Size())
             {
@@ -42,9 +42,52 @@ namespace VectorNS
             }
         }
 
+        public Vector ScalarProduct(float scalar)
+        {
+            float[] dims = (float[])_vector.Clone();
+            for (int i = 0; i < Size(); i++)
+            {
+                dims[i] *= scalar;
+            }
+            return new Vector(dims);
+        }
+
         public override string ToString()
         {
             return "<" + String.Join(", ", _vector) + ">";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            // Check other object is a Vector
+            if (typeof(Vector).IsInstanceOfType(obj))
+            {
+                Vector other = (Vector)obj;
+
+                // Check other object has same dimensions
+                if (this.Size() == other.Size())
+                {
+                    for (int i = 0; i < Size(); i++)
+                    {
+                        if (this.Get(i) != other.Get(i))
+                        {
+                            // Non-matching dimensions
+                            return false;
+                        }
+                    }
+                    // All dimensions have the same value
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public int Size()
@@ -52,7 +95,7 @@ namespace VectorNS
             return _vector.Length;
         }
 
-        static void Main()
+        public static void Main()
         {
             float[] dims1 = { 3, 2 };
             float[] dims2 = { 1, -1 };
