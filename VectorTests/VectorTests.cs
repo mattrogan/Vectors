@@ -92,6 +92,46 @@ public class VectorTests
         }
     }
 
+    [TestMethod]
+    public void TestAddition()
+    {
+        // Arrange
+        float[] dims1 = { 3, 2, 0 };
+        float[] dims2 = { 1, -1, 2 };
+        float[] dims3 = { 4, 1, 2 };
+        Vector v1, v2, expected, actual;
+        v1 = new(dims1);
+        v2 = new(dims2);
+
+        // Act
+        actual = v1.Add(v2);
+        expected = new(dims3);
+
+        // Assert
+        Assert.IsTrue(actual.Equals(expected));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidDataException),
+        "dimensions must be equal")]
+    public void TestInvalidAddition()
+    {
+        // Arrange
+        float[] dims1 = { 3, 2 };
+        float[] dims2 = { 1, -1, 2 };
+        Vector v1, v2;
+
+        // Act
+        v1 = new(dims1);
+        v2 = new(dims2);
+
+        // Assert
+        v1.Add(v2);
+
+
+    }
+
+
 
 
 

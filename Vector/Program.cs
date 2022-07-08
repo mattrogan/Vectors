@@ -95,6 +95,31 @@ namespace VectorNS
             return _vector.Length;
         }
 
+        public Vector Add(object? obj)
+        {
+            if (typeof(Vector).IsInstanceOfType(obj))
+            {
+                Vector other = (Vector)obj;
+                if (this.Size() == other.Size())
+                {
+                    float[] dims = new float[Size()];
+                    for (int i = 0; i < Size(); i++)
+                    {
+                        dims[i] = this.Get(i) + other.Get(i);
+                    }
+                    return new(dims);
+                }
+                else
+                {
+                    throw new InvalidDataException("dimensions must be equal");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("can only add vectors to other vectors");
+            }
+        }
+
         public static void Main()
         {
             float[] dims1 = { 3, 2 };
