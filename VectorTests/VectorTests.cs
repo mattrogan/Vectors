@@ -93,6 +93,32 @@ public class VectorTests
     }
 
     [TestMethod]
+    public void TestInequalityWithNull()
+    {
+        float[] dims1 = { 3, 2 };
+        float[] dims2 = { 1, -1 };
+        Vector v1 = new(dims1);
+        Vector v2 = new(dims2);
+        Vector v3 = new();
+
+        Assert.IsFalse(v1.Equals(null));
+        Assert.IsFalse(v2.Equals(null));
+        Assert.IsFalse(v3.Equals(null));
+    }
+
+    [TestMethod]
+    public void TestInequalityWithInvalidTypes()
+    {
+        float[] dims1 = { 3, 2 };
+        float[] dims2 = { 1, -1 };
+        Vector v1 = new(dims1);
+        Vector v2 = new(dims2);
+
+        Assert.IsFalse(v1.Equals("<3, 2>"));
+        Assert.IsFalse(v2.Equals(dims2));
+    }
+
+    [TestMethod]
     public void TestAddition()
     {
         // Arrange
