@@ -37,7 +37,21 @@ public class VectorTests
         Assert.AreEqual(y, 2);
     }
 
+    [TestMethod]
+    [ExpectedException(typeof(IndexOutOfRangeException),
+        "invalid vector dimension")]
+    public void TestGetterErrors()
+    {
+        float[] data = { 3, 4, 5, 4 };
+        Vector v = new Vector(data);
+        for (int i = 0; i < v.Size(); i++)
+        {
+            Assert.AreEqual(data[i], v.Get(i), 0.00000001);
+        }
+        float n = v.Get(-2);
+    }
 
+    
     [TestMethod]
     public void TestSetters()
     {
@@ -52,6 +66,20 @@ public class VectorTests
         // Assert
         Assert.AreEqual(3, v.Get(0));
         Assert.AreEqual(2, v.Get(1));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(IndexOutOfRangeException),
+        "invalid vector dimension")]
+    public void TestSetterErrors()
+    {
+        float[] emptyDims = new float[3];
+        Vector v = new(emptyDims);
+        for (int i = 0; i < v.Size(); i++)
+        {
+            v.Set(i, i);
+        }
+        v.Set(-2, 4);
     }
 
     [TestMethod]
