@@ -90,6 +90,11 @@ namespace VectorNS
             }
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public int Size()
         {
             return _vector.Length;
