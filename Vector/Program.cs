@@ -134,12 +134,5 @@ namespace VectorNS
         }
 
     }
-
-    /*class Vector3D : Vector
-    {
-
-    }*/
-
-
     
 }
